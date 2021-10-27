@@ -83,6 +83,10 @@ class Client {
         }
       }
     })();
+
+    /* Require Files */
+    this.functions = require("./utils/functions/index");
+    //this.users = require("./src/users");
   }
 
   on(event, f) {
@@ -236,4 +240,4 @@ function checkEmit(client, emitter) {
   return true;
 }
 
-module.exports = Client;
+module.exports = { Client };

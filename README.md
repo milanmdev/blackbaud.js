@@ -32,8 +32,8 @@ Node.js package to interact with Blackbaud's learning management system (LMS)
 # Example
 
 ```js
-const Blackbaud = require("blackbaud.js");
-const client = new Blackbaud({
+const { Client } = require("./index");
+const client = new Client({
   url: "example.myschoolapp.com",
   username: "john.doe",
   password: "JohnDoePassword123",
