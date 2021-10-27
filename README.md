@@ -47,7 +47,8 @@ client.on("ready", async function (client) {
 
   let UserManager = new client.UserManager(client);
 
-  const userStatus = await UserManager.userStatus();
-  console.log(userStatus.partial.unreadMessageCount); // Returns the number of unread messages for the current user.
+  await UserManager.getStatus().then((data) => {
+    console.log(data.partial.unreadMessageCount); // Returns the number of unread messages for the current user.
+  });
 });
 ```

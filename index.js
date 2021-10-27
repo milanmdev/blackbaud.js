@@ -95,14 +95,6 @@ class Client {
     this.UserManager = require("./src/users");
   }
 
-  once(event, f) {
-    try {
-      eventManager.once(event, f);
-    } catch (err) {
-      return err;
-    }
-  }
-
   on(event, f) {
     try {
       eventManager.on(event, f);
@@ -111,134 +103,9 @@ class Client {
     }
   }
 
-  /**
-   * Gets the status for the authenticated user.
-   * @returns User
-   */
-  async userStatus() {
+  once(event, f) {
     try {
-      this.functions.checkEmit(this, eventManager);
-
-      const res = this.httpInstance
-        .get("/api/webapp/userstatus", {
-          headers: {
-            "User-Agent": this.http.User_Agent,
-            origin: this.url,
-            Cookie: this.login_tokens,
-          },
-        })
-        .then(async (res) => {
-          return res.data;
-        });
-
-      return new User(this, this.user._raw, await res);
-    } catch (err) {
-      return err;
-    }
-  }
-
-  /**
-   * Gets active report cards for the authenticated user.
-   * @returns User
-   */
-  async getReportCards() {
-    try {
-      this.functions.checkEmit(this, eventManager);
-
-      const res = this.httpInstance
-        .get(
-          `/api/Grading/StudentReportCardTemplateList?studentId=${
-            this.user.id
-          }&schoolYearLabel=${new Date().getFullYear()}+-+${
-            new Date().getFullYear() + 1
-          }`,
-          {
-            headers: {
-              "User-Agent": this.http.User_Agent,
-              origin: this.url,
-              Cookie: this.login_tokens,
-            },
-          }
-        )
-        .then(async (res) => {
-          return res.data;
-        });
-
-      return new User(this, this.user._raw, await res);
-    } catch (err) {
-      return err;
-    }
-  }
-
-  /**
-   * Gets active assignments for the authenticated user.
-   * @returns User
-   * @param persona {number} - Account Type: 3 = Faculty; 2 = Student
-   */
-  async getAssignments(persona) {
-    try {
-      this.functions.checkEmit(this, eventManager);
-      if (!persona) throw new Error("'persona' cannot be undefined");
-      if (persona != 2 && persona != 3)
-        throw new Error("'persona' must be a number, 2 or 3");
-
-      const res = this.httpInstance
-        .get(
-          `/api/DataDirect/AssignmentCenterAssignments/?format=json&filter=2&dateStart=${
-            new Date().getMonth() + 1
-          }%2F${new Date().getDate()}%2F${new Date().getFullYear()}&dateEnd=${
-            new Date().getMonth() + 1
-          }%2F${new Date().getDate()}%2F${new Date().getFullYear()}&persona=${persona}&statusList=&sectionList=`,
-          {
-            headers: {
-              "User-Agent": this.http.User_Agent,
-              origin: this.url,
-              Cookie: this.login_tokens,
-            },
-          }
-        )
-        .then(async (res) => {
-          return res.data;
-        });
-
-      return new User(this, this.user._raw, await res);
-    } catch (err) {
-      return err;
-    }
-  }
-
-  /**
-   * Gets classes for the authenticated user.
-   * @returns User
-   * @param persona {number} - Account Type: 3 = Faculty; 2 = Student
-   */
-  async getClasses(persona) {
-    try {
-      this.functions.checkEmit(this, eventManager);
-      if (!persona) throw new Error("'persona' cannot be undefined");
-      if (persona != 2 && persona != 3)
-        throw new Error("'persona' must be a number, 2 or 3");
-
-      const res = this.httpInstance
-        .get(
-          `/api/datadirect/ParentStudentUserAcademicGroupsGet?userId=${
-            this.user.id
-          }&schoolYearLabel=${new Date().getFullYear()}+-+${
-            new Date().getFullYear() + 1
-          }&memberLevel=3&persona=${persona}&durationList=&markingPeriodId=`,
-          {
-            headers: {
-              "User-Agent": this.http.User_Agent,
-              origin: this.url,
-              Cookie: this.login_tokens,
-            },
-          }
-        )
-        .then(async (res) => {
-          return res.data;
-        });
-
-      return new User(this, this.user._raw, await res);
+      eventManager.once(event, f);
     } catch (err) {
       return err;
     }
