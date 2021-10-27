@@ -68,7 +68,7 @@ class Client {
         );
       } else {
         var fetchToken = this.httpInstance
-          .get("***REMOVED***", {
+          .get("/api/webapp/context", {
             headers: {
               "User-Agent": this.http.User_Agent,
               origin: this.url,
