@@ -8,6 +8,7 @@ class Client {
   constructor(options) {
     var instance = this;
     EventEmitter.call(instance);
+    this.eventManager = eventManager;
 
     if (!options.url) throw new Error('"url" cannot be undefined');
     if (!options.username) throw new Error('"username" cannot be undefined');
@@ -16,6 +17,11 @@ class Client {
     this.url = options.url;
     this.username = options.username;
     this.password = options.password;
+    this.clientData = {
+      url: this.url,
+      username: this.username,
+      password: this.password,
+    };
 
     var default_http = {
       User_Agent:
@@ -86,7 +92,15 @@ class Client {
 
     /* Require Files */
     this.functions = require("./utils/functions/index");
-    //this.users = require("./src/users");
+    this.UserManager = require("./src/users");
+  }
+
+  once(event, f) {
+    try {
+      eventManager.once(event, f);
+    } catch (err) {
+      return err;
+    }
   }
 
   on(event, f) {
@@ -103,7 +117,7 @@ class Client {
    */
   async userStatus() {
     try {
-      checkEmit(this, eventManager);
+      this.functions.checkEmit(this, eventManager);
 
       const res = this.httpInstance
         .get("/api/webapp/userstatus", {
@@ -129,7 +143,7 @@ class Client {
    */
   async getReportCards() {
     try {
-      checkEmit(this, eventManager);
+      this.functions.checkEmit(this, eventManager);
 
       const res = this.httpInstance
         .get(
@@ -163,7 +177,7 @@ class Client {
    */
   async getAssignments(persona) {
     try {
-      checkEmit(this, eventManager);
+      this.functions.checkEmit(this, eventManager);
       if (!persona) throw new Error("'persona' cannot be undefined");
       if (persona != 2 && persona != 3)
         throw new Error("'persona' must be a number, 2 or 3");
@@ -200,7 +214,7 @@ class Client {
    */
   async getClasses(persona) {
     try {
-      checkEmit(this, eventManager);
+      this.functions.checkEmit(this, eventManager);
       if (!persona) throw new Error("'persona' cannot be undefined");
       if (persona != 2 && persona != 3)
         throw new Error("'persona' must be a number, 2 or 3");
@@ -229,15 +243,6 @@ class Client {
       return err;
     }
   }
-}
-
-function checkEmit(client, emitter) {
-  if (!client.loggedIn) throw new Error("Client is not logged in");
-  let eventsEmitted = emitter.eventNames();
-  if (!eventsEmitted.includes("ready"))
-    throw new Error('"ready" event has not been emitted');
-
-  return true;
 }
 
 module.exports = { Client };

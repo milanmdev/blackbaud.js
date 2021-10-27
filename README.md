@@ -32,7 +32,8 @@ Node.js package to interact with Blackbaud's learning management system (LMS)
 # Example
 
 ```js
-const { Client } = require("./index");
+const { Client } = require("blackbaud.js");
+
 const client = new Client({
   url: "example.myschoolapp.com",
   username: "john.doe",
@@ -44,7 +45,9 @@ client.on("ready", async function (client) {
     `[Blackbaud] Client logged in and ready as "${client.user.username}"`
   );
 
-  const userStatus = await client.userStatus();
+  let UserManager = new client.UserManager(client);
+
+  const userStatus = await UserManager.userStatus();
   console.log(userStatus.partial.unreadMessageCount); // Returns the number of unread messages for the current user.
 });
 ```

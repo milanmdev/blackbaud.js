@@ -1,6 +1,6 @@
 {
   "name": "blackbaud.js",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Node.js package to interact with Blackbaud's learning management system (LMS)",
   "main": "index.js",
   "scripts": {
