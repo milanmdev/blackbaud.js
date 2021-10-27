@@ -1,0 +1,27 @@
+{
+  "name": "blackbaud.js",
+  "version": "1.0.0",
+  "description": "Node.js package to interact with Blackbaud's learning management system (LMS)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milanmdev/blackbaud.js.git"
+  },
+  "keywords": [
+    "blackbaud",
+    "nodejs",
+    "javascript"
+  ],
+  "author": "Milan M <milan@milanm.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/milanmdev/blackbaud.js/issues"
+  },
+  "homepage": "https://github.com/milanmdev/blackbaud.js#readme",
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
+}
