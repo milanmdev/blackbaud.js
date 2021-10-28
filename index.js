@@ -93,6 +93,7 @@ class Client {
     /* Require Files */
     this.functions = require("./utils/functions/index");
     this.UserManager = require("./src/users");
+    this.SchoolManager = require("./src/schools");
   }
 
   on(event, f) {

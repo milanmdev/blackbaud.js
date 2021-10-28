@@ -39,13 +39,12 @@ const client = new Client({
   username: "john.doe",
   password: "JohnDoePassword123",
 });
+let UserManager = new client.UserManager(client);
 
 client.on("ready", async function (client) {
   console.log(
     `[Blackbaud] Client logged in and ready as "${client.user.username}"`
   );
-
-  let UserManager = new client.UserManager(client);
 
   await UserManager.getStatus().then((data) => {
     console.log(data.partial.unreadMessageCount); // Returns the number of unread messages for the current user.

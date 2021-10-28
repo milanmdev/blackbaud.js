@@ -4,9 +4,6 @@ class UserManager {
   constructor(client) {
     if (!client) throw new Error('"client" cannot be undefined');
     this.client = client;
-
-    this.fetchProperties =
-      "FieldsToNull%2CLastName%2CFirstName%2CMiddleName%2COtherLastName%2CPrefix%2CSuffix%2CMaidenName%2CNickName%2CDisplayName%2CGender%2CPronouns%2CBirthDate%2CLivingStatus%2CBoardingOrDay%2CAffiliation%2CRetireDate%2CReligionTypeId%2CEthnicityType%2CCitizenship%2CIsAbroad%2CPublishUserPage%2CIsDeceased%2CDeceasedDate%2CIsLost%2CSsn%2CCustomField1%2CCustomField2%2CCustomField3%2CCustomField4%2CCustomField5%2CCustomField6%2CCustomField7%2CCustomField8%2CCustomField9%2CCustomField10%2CPersonalBio%2CEmail%2CEmailIsBad%2CCcEmail%2CCcEmailIsBad%2CGreeting%2CScreenName%2CIMService%2CPersonalWebsite%2CProfilePhoto%2CLatinoHispanic%2CInStateResident%2CResidentCounty%2CResidentFromDate%2CBirthPlace%2CPrimaryLanguageId%2CSpokenLanguages%2CRaceSelections%2CVisaTypeId%2CVisaStatus%2CVisaNumber%2CVisaIssueDate%2CVisaExpireDate%2CPassportNumber%2CPassportExpireDate%2CStudentId%2CLockerNbr%2CLockerCombo%2CMailboxNbr%2CMailboxCombo%2CPhotoEditSettings%2CSchoolProgramId%2CInternational%2CStudentResponsibleSignerInd";
   }
   /**
    * Get the status for the authenticated user.
@@ -153,7 +150,7 @@ class UserManager {
       if (typeof id !== "number") throw new Error("'id' must be a number");
 
       const res = this.client.httpInstance
-        .get(`/api/user/${id}/?propertylist=${this.fetchProperties}`, {
+        .get(`/api/user/${id}/?propertylist=`, {
           headers: {
             "User-Agent": this.client.http.User_Agent,
             origin: this.client.url,
@@ -165,7 +162,6 @@ class UserManager {
         });
 
       let userElement = new User(this.client, await res);
-      userElement.id = id;
 
       return userElement;
     } catch (err) {

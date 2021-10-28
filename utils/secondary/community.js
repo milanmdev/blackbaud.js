@@ -1,16 +1,18 @@
-exports.Class = class Class {
+const { User } = require("./../user.js");
+
+exports.Community = class Community {
   constructor(client, data) {
     this.id = data.sectionid;
     this.name = data.sectionidentifier;
-    this.room = data.room;
+    this.description = data.groupdescription;
+    this.level = data.schoollevel;
     this.owner = {
       id: data.OwnerId,
-      name: data.groupownername,
       email: data.groupowneremail,
       avatar: data.groupownerphoto
         ? {
             hash: data.groupownerphoto.split(".")[0],
-            url: `https://${client.url}/ftpimages/335/user/${data.groupownerphoto}`,
+            url: null,
           }
         : null,
     };

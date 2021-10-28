@@ -1,6 +1,6 @@
-const { ReportCard } = require("./reportCard");
-const { Assignment } = require("./assignment");
-const { Class } = require("./class");
+const { ReportCard } = require("./secondary/reportCard");
+const { Assignment } = require("./secondary/assignment");
+const { Class } = require("./secondary/class");
 
 exports.User = class User {
   constructor(client, data, partial) {
