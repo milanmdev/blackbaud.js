@@ -67,7 +67,7 @@ class UserManager {
   /**
    * Get active assignments for the authenticated user.
    * @returns User
-   * @param persona {number} - Account Type: 3 = Faculty; 2 = Student
+   * @param {number} persona - Account Type: 3 = Faculty; 2 = Student
    */
   async getAssignments(persona) {
     try {
@@ -104,7 +104,7 @@ class UserManager {
   /**
    * Get classes for the authenticated user.
    * @returns User
-   * @param persona {number} - Account Type: 3 = Faculty; 2 = Student
+   * @param {number} persona - Account Type: 3 = Faculty; 2 = Student
    */
   async getClasses(persona) {
     try {
@@ -141,7 +141,7 @@ class UserManager {
   /**
    * Fetch a user by their Id.
    * @returns User
-   * @param id {number} - Id of the user
+   * @param {number} id - Id of the user
    */
   async fetch(id) {
     try {

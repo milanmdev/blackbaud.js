@@ -40,7 +40,7 @@ class SchoolManager {
   /**
    * Get communities available for the user
    * @returns School
-   * @param persona {number} - Account Type: 3 = Faculty; 2 = Student
+   * @param {number} persona - Account Type: 3 = Faculty; 2 = Student
    */
   async getCommunities(persona) {
     try {
